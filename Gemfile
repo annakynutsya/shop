@@ -78,3 +78,4 @@ end
 gem "factory_bot", "~> 6.2"
 gem 'simplecov'
 gem 'faker'
+gem "devise"
