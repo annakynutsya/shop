@@ -1,5 +1,4 @@
 class PagesController < ApplicationController
-  def index
-    render
+  def all_books
   end
 end

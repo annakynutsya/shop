@@ -1,0 +1,18 @@
+<div class="h-4/5 text-center py-3.5 bg-gray-300 w-2/6 m-auto rounded-3xl ">
+<h2 class="text-2xl font-bold">Forgot your password?</h2>
+
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field py-3.5 my-5">
+    <%= f.label :email, class:"text-base font-semibold" %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"w-96 h-12 max-w-sm rounded-xl bg-cyan-200 border-gray-800 border-2" %>
+  </div>
+  <%- if controller_name != 'sessions' %>
+  <%= link_to "Log in", new_session_path(resource_name), class:"my-5 px-6 py-3  mr-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear bg-pink-500 rounded-full shadow outline-none active:bg-pink-600 hover:shadow-lg focus:outline-none"%><br />
+<% end %>
+  
+<% end %>
+
+
+</div>

@@ -1,0 +1,52 @@
+
+
+
+<div class="bg-pink-500">
+<nav class="max-w-5xl p-5 m-auto bg-pink-500 shadow md:flex md:items-center md:justify-between">
+    <div class="flex items-center justify-between">
+      <a href="/" class="cursor-pointer">
+        <img class="inline h-16 ml-9" src="https://toys.com.ua/themes/flat/i/toys.png">
+        
+      </a>
+
+      <span class="block mx-2 text-3xl cursor-pointer md:hidden">
+        <ion-icon name="menu" onclick="Menu(this)"></ion-icon>
+      </span>
+    </div>
+
+    <ul class=" md:flex md:items-center md:z-auto md:static absolute bg-pink-500 w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500">
+      <li class="mx-4 my-6 md:my-0">
+        <%= link_to "ALL PRODUCTS", root_path, class: "text-xl text-white duration-500 hover:text-cyan-500 font-semibold" %>
+      </li>
+      <li class="mx-4 my-6 md:my-0">
+        <%= link_to "CATEGORIES", categories_path, class: "text-xl text-white duration-500 hover:text-cyan-500 font-semibold" %>
+      </li>
+      <li class="mx-4 my-6 md:my-0">
+        <%= link_to "INFO", categories_path, class: "text-xl text-white duration-500 hover:text-cyan-500 mr-16 font-semibold" %>
+        
+      </li>
+        <% if user_signed_in? %>
+            <%= button_to "Log out", destroy_user_session_path, method: :delete, form: {turbolink: false}, class: "text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2" %>
+          <% else %>         
+            <%= link_to new_user_session_path do %>
+              <button type="button" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Log in</button>
+            <% end %>
+            <%= link_to new_user_registration_path do %>
+              <button type="button" class="text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Sign up</button>
+            <% end %>
+          <% end %>
+
+    </ul>
+    
+          
+  </nav>
+  <script>
+    function Menu(e){
+      let list = document.querySelector('ul');
+      e.name === 'menu' ? (e.name = "close",list.classList.add('top-[80px]') , list.classList.add('opacity-100')) :( e.name = "menu" ,list.classList.remove('top-[80px]'),list.classList.remove('opacity-100'))
+    }
+  </script>
+</div>
+
+
+  
