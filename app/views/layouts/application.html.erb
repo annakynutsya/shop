@@ -9,7 +9,9 @@
     <script src="http://cdn.tailwindcss.com"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <script  src="./js/script.js"></script> 
+    <script src="https://kit.fontawesome.com/bdb0b9b1d1.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload", defer: true %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -19,4 +21,5 @@
       <%= yield %>
     </main>
   </body>
+
 </html>
