@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_21_164202) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_28_200925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_21_164202) do
     t.index ["user_id"], name: "index_adresses_on_user_id"
   end
 
+  create_table "cart_products", force: :cascade do |t|
+    t.bigint "cart_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_cart_products_on_cart_id"
+    t.index ["product_id"], name: "index_cart_products_on_product_id"
+  end
+
   create_table "carts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -32,12 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_21_164202) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
-  create_table "carts_products", id: false, force: :cascade do |t|
-    t.bigint "cart_id", null: false
-    t.bigint "product_id", null: false
-    t.index ["cart_id", "product_id"], name: "index_carts_products_on_cart_id_and_product_id"
-    t.index ["product_id", "cart_id"], name: "index_carts_products_on_product_id_and_cart_id"
-  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -102,6 +105,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_21_164202) do
   end
 
   add_foreign_key "adresses", "users"
+  add_foreign_key "cart_products", "carts"
+  add_foreign_key "cart_products", "products"
   add_foreign_key "carts", "users"
   add_foreign_key "order_details", "adresses"
   add_foreign_key "order_details", "orders"
