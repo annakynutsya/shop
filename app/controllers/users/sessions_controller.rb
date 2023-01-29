@@ -17,6 +17,12 @@ class Users::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
+  def destroy
+    cart_products = CartProduct.where(cart_id: current_user.cart.id).map(&:product_id)
+    super
+    session[:product_id] = cart_products.map(&:to_s)
+  end
+    
 
   # protected
 
