@@ -7,7 +7,7 @@ class Users::SessionsController < Devise::SessionsController
   # def new
   #   super
   # end
-  
+
   # POST /resource/sign_in
   # def create
   #    super
@@ -17,12 +17,12 @@ class Users::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
-  def destroy
-    cart_products = CartProduct.where(cart_id: current_user.cart.id).map(&:product_id)
-    super
-    session[:product_id] = cart_products.map(&:to_s)
-  end
-    
+   def destroy
+     cart_products = Product.where(id: current_user.cart.cart_products.pluck(:product_id))
+     super
+     session[:product_id] = cart_products
+   end
+
 
   # protected
 

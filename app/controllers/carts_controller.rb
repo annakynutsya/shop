@@ -1,24 +1,15 @@
 class CartsController < ApplicationController
   def show
-    if current_user
-      cart_products = CartProduct.where(cart: current_user).map(&:product_id)
-      @products_order = Product.where(id: cart_products)
-    elsif session[:product_id]
-      @products_order = Product.where(id: session[:product_id])
-    end
+    @cart_products = resource
   end
 
   def create
-    if current_user
+    if user_signed_in?
       CartProduct.create(product_id: params[:id], cart_id: current_user.cart.id)
-    else
-      if session[:product_id]
-        session[:product_id] << params[:id].to_s  
-      else
-        session[:product_id] = [params[:id]][0].to_s
-      end
+    elsif session[:product_id].present?
+      session[:product_id] << params[:id]
     end
-    redirect_to get_cart_path
+    redirect_to cart_path
   end
 
   def destroy
@@ -27,6 +18,16 @@ class CartsController < ApplicationController
     else
       session[:product_id].delete(params[:id])
     end
-    redirect_to get_cart_path
+    redirect_to cart_path
+  end
+
+  private
+
+  def resource
+    if user_signed_in?
+      Product.where(id: current_user.cart.cart_products.pluck(:product_id))
+    elsif session[:product_id]
+      Product.where(id: session[:product_id])
+    end
   end
 end

@@ -1,8 +1,0 @@
-<div class="max-w-7xl mx-auto">
-  <%= link_to (image_tag 'banner.jpg'), root_path, method: :get, class: "w-full cursor-pointer" %>
-    <% @products.each do |product| %>
-    <div class=" my-7 text-center mx-5 bg-cyan-200 py-3.5 inline-flex flex-col rounded-lg shadow flex-wrap w-52 h-60">
-      <%= render partial:'layouts/product', locals: { product: product } %>
-</div>
-<% end %>
-</div>

@@ -12,11 +12,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    @current_cart = Cart.create(user_id: current_user.id)
+    current_cart = Cart.create(user_id: current_user.id)
     session[:product_id].each do |product_id|
       CartProduct.create(cart_id: current_cart.id, product_id: product_id)
     end
-   end
+  end
 
   # GET /resource/edit
   # def edit
