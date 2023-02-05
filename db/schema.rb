@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_21_164202) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_02_181011) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,10 +19,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_21_164202) do
     t.string "city"
     t.string "street"
     t.text "comment"
-    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_adresses_on_user_id"
+  end
+
+  create_table "cart_products", force: :cascade do |t|
+    t.bigint "cart_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_cart_products_on_cart_id"
+    t.index ["product_id"], name: "index_cart_products_on_product_id"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -49,11 +58,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_21_164202) do
   create_table "order_details", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.string "first_name"
-    t.string "last_name_string"
     t.string "email"
     t.bigint "adress_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "last_name"
     t.index ["adress_id"], name: "index_order_details_on_adress_id"
     t.index ["order_id"], name: "index_order_details_on_order_id"
   end
@@ -73,6 +82,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_21_164202) do
     t.integer "amount"
     t.index ["order_id", "product_id"], name: "index_orders_products_on_order_id_and_product_id"
     t.index ["product_id", "order_id"], name: "index_orders_products_on_product_id_and_order_id"
+  end
+
+  create_table "product_orders", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.bigint "product_id", null: false
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_product_orders_on_order_id"
+    t.index ["product_id"], name: "index_product_orders_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -102,9 +121,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_21_164202) do
   end
 
   add_foreign_key "adresses", "users"
+  add_foreign_key "cart_products", "carts"
+  add_foreign_key "cart_products", "products"
   add_foreign_key "carts", "users"
   add_foreign_key "order_details", "adresses"
   add_foreign_key "order_details", "orders"
   add_foreign_key "orders", "users"
+  add_foreign_key "product_orders", "orders"
+  add_foreign_key "product_orders", "products"
   add_foreign_key "products", "categories"
 end

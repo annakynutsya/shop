@@ -1,18 +1,19 @@
 class CategoriesController < ApplicationController
-  def new
-    @category = Category.new
-  end
   def index
-    @categories = Category.all
+    @categories = collection
   end
+
   def show
-    @category = Category.find(params[:id])
+    @category = resource
   end
+  
   private
-    def set_category
-        @category = Category.find(params[:id])
-    end
-    def category_params
-      params.require(:category).permit(:name)
+
+  def collection
+    Category.ordered
+  end
+
+  def resource
+    collection.find(params[:id])
   end
 end

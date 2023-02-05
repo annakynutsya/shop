@@ -1,50 +1,44 @@
 class OrdersController < ApplicationController
-    before_action :set_quote, only: [:show, :edit, :update, :destroy]
-
-  def index
-    @orders = Order.all
-  end
-
   def show
+    @ordered_products = ProductOrder.where(order_id: @order.id)
   end
 
   def new
-    @order = Order.new
   end
 
   def create
-    @order = Order.new(quote_params)
-
-    if @order.save
-      redirect_to orders_path, notice: "Order was successfully created."
-    else
-      render :new
+    if user_signed_in?
+      @order = Order.create(user_id: current_user.id, ordered_at: DateTime.current, status: "Completed")
+      @products_ids = current_user.cart.cart_products.pluck(:product_id)
+      @products_ids.each do |item|
+        @products_order = ProductOrder.create(order_id: @order.id, product_id: item, amount: 1)
+      end
+      adress = Adress.new(adress_params)
+      adress.user_id = current_user.id
+      adress.save
+      @order_detail = OrderDetail.new(adress_id: adress.id, order_id: @order.id)
+      @order_detail.save
+    elsif session[:product_id].present?
+      @order = Order.create(ordered_at: DateTime.current, status: "Completed")
+      session[:product_id].each do |product_id|
+        @products_order = ProductOrder.create(order_id: @order.id, product_id: product_id)
+      end
+      adress = Adress.create(adress_params)
+      @order_detail = OrderDetail.new(order_detail_params)
+      @order_detail.order_id = @order.id
+      @order_detail.adress_id = adress.id
+      @order_detail.save
     end
-  end
 
-  def edit
-  end
-
-  def update
-    if @order.update(order_params)
-      redirect_to orders_path, notice: "Order was successfully updated."
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @order.destroy
-    redirect_to orders_path, notice: "Order was successfully destroyed."
+    redirect_to root_path
   end
 
   private
+    def adress_params
+      params.require(:adress).permit(:country, :city, :street)
+    end
 
-  def set_quote
-    @order = Order.find(params[:id])
-  end
-
-  def quote_params
-    params.require(:order).permit(:status, :ordered_at)
-  end
+    def order_detail_params
+      params.require(:order_detail).permit(:first_name, :last_name, :email)
+    end
 end

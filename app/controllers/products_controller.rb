@@ -1,32 +1,23 @@
 class ProductsController < ApplicationController
-    before_action :set_product, only: [:show, :edit, :update, :destroy]
-
-    def index
-        @products = Product.all
+  def index
+    if params[:id]
+      @products = collection.where(category_id: params[:id])
+    else
+      @products = collection
     end
+  end
 
-    def add_to_cart
-        id = params[:id].to_i
-        session[:cart] << id unless session[:cart].include?(id)
-        redirect_to products_path
-      end
-    
-      def remove_from_cart
-        id = params[:id].to_i
-        session[:cart].delete(id)
-        redirect_to cart_path
-      end
-    
-      def show
+  def show
+    @product = resource
+  end
 
-      end
+  private
 
-    private
-    def set_product
-        @product = Product.find(params[:id])
-    end
+  def collection
+    Product.ordered
+  end
 
-    def product_params
-        params.require(:products).permit(:name, :description, :category_id)
-    end
+  def resource
+    collection.find(params[:id])
+  end
 end

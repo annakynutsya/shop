@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe "pages/index.html.tailwindcss", type: :view do
+RSpec.describe ProductOrder, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end
