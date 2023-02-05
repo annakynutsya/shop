@@ -4,4 +4,5 @@ class Product < ApplicationRecord
   has_many :product_orders, dependent: :destroy
 
   scope :ordered, -> { order(position: :desc) }
+  scope :user_cart_products, ->(id) { find(id) }
 end
