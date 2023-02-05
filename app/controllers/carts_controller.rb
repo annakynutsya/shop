@@ -6,7 +6,7 @@ class CartsController < ApplicationController
   def create
     if user_signed_in?
       CartProduct.create(product_id: params[:id], cart_id: current_user.cart.id)
-    elsif session[:product_id].present?
+    elsif session[:product_id]
       session[:product_id] << params[:id]
     end
     redirect_to cart_path
@@ -25,9 +25,9 @@ class CartsController < ApplicationController
 
   def resource
     if user_signed_in?
-      Product.where(id: current_user.cart.cart_products.pluck(:product_id))
+      Product.user_cart_products(current_user.cart.product_ids)
     elsif session[:product_id]
-      Product.where(id: session[:product_id])
+      Product.find(session[:product_id])
     end
   end
 end
