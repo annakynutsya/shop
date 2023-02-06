@@ -79,3 +79,4 @@ gem "factory_bot", "~> 6.2"
 gem 'simplecov'
 gem 'faker'
 gem "devise"
+gem 'simple_form'

@@ -1,0 +1,21 @@
+@layer base {
+  .table {
+    @apply w-full text-lg text-left text-white bg-cyan-400;
+  }
+
+  .thead {
+    @apply text-lg text-white uppercase bg-cyan-400;
+  }
+
+  .th {
+    @apply px-6 py-6 font-medium text-gray-900 whitespace-nowrap dark:text-white;
+  }
+
+  .table-container {
+    @apply shadow-md sm:rounded-lg w-2/4 mx-auto mt-32;
+  }
+
+  .tr {
+    @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600;
+  }
+}

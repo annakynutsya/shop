@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
 
   def new
+    @order = Order.find_by(params[:order_id])
   end
 
   def create
@@ -39,6 +40,7 @@ class OrdersController < ApplicationController
   end
 
   private
+
     def adress_params
       params.require(:adress).permit(:country, :city, :street)
     end
