@@ -6,10 +6,11 @@ class CartsController < ApplicationController
   def create
     if user_signed_in?
       CartProduct.create(product_id: params[:id], cart_id: current_user.cart.id)
+      redirect_to cart_path(:id)
     elsif session[:product_id]
       session[:product_id] << params[:id]
+      redirect_to cart_path(:id)
     end
-    redirect_to cart_path
   end
 
   def destroy
@@ -27,7 +28,7 @@ class CartsController < ApplicationController
     if user_signed_in?
       Product.user_cart_products(current_user.cart.product_ids)
     elsif session[:product_id]
-      Product.find(session[:product_id])
+      Product.where(id: session[:product_id])
     end
   end
 end
