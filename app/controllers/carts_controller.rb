@@ -3,14 +3,13 @@ class CartsController < ApplicationController
     @cart_products = resource
   end
 
-  def create
+  def add_product
     if user_signed_in?
       CartProduct.create(product_id: params[:id], cart_id: current_user.cart.id)
-      redirect_to cart_path(:id)
     elsif session[:product_id]
       session[:product_id] << params[:id]
-      redirect_to cart_path(:id)
     end
+    redirect_to carts_path
   end
 
   def destroy
@@ -19,7 +18,7 @@ class CartsController < ApplicationController
     else
       session[:product_id].delete(params[:id])
     end
-    redirect_to cart_path
+    redirect_to carts_path
   end
 
   private
