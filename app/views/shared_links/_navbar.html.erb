@@ -1,13 +1,13 @@
 <div class="bg-pink-500">
-  <nav>
+  <nav class="navbar">
     <div class="logo">
       <%= link_to (image_tag 'logo.png'), root_path, class: "w-32 cursor-pointer" %>
     </div>
-    <ul>
-      <li>
+    <ul class="list">
+      <li class="list-el">
         <%= link_to "ALL PRODUCTS", root_path, class: "nav-link" %>
       </li>
-      <li>
+      <li class="list-el">
         <%= link_to "CATEGORIES", categories_path, class: "nav-link" %>
       </li>
       <% if user_signed_in? %>
