@@ -1,33 +1,66 @@
 class CartsController < ApplicationController
-  def show
-    @cart_products = resource
+  def new
+    @order = Order.find_by(params[:order_id])
   end
 
-  def add_product
+  def create
     if user_signed_in?
-      CartProduct.create(product_id: params[:id], cart_id: current_user.cart.id)
-    elsif session[:product_id]
-      session[:product_id] << params[:id]
+      @order = Order.create(user_id: current_user.id, ordered_at: DateTime.current, status: "Completed")
+      products_ids = current_user.cart.cart_products.pluck(:product_id)
+      products_ids.each do |item|
+        @products_order = ProductOrder.create(order_id: @order.id, product_id: item, amount: 1)
+      end
+      adress = Adress.new(adress_params)
+      adress.user_id = current_user.id
+      adress.save
+      @order_detail = OrderDetail.new(adress_id: adress.id, order_id: @order.id)
+      @order_detail.save
+      redirect_to order_path(@order), method: :get
+    elsif session[:product_id].present?
+      @order = Order.create(ordered_at: DateTime.current, status: "Completed")
+      session[:product_id].each do |product_id|
+        @products_order = ProductOrder.create(order_id: @order.id, product_id: product_id)
+      end
+      adress = Adress.create(adress_params)
+      @order_detail = OrderDetail.new(order_detail_params)
+      @order_detail.order_id = @order.id
+      @order_detail.adress_id = adress.id
+      @order_detail.save
     end
-    redirect_to carts_path
+    clear_cart
   end
 
-  def destroy
-    if current_user
-      CartProduct.find_by(product_id: params[:id], cart_id: current_user.cart.id).destroy
-    else
-      session[:product_id].delete(params[:id])
+  def show
+    if user_signed_in?
+      @order = resource
+      @ordered_products = Product.find(@order.product_ids)
+      @total_sum = total_sum
     end
-    redirect_to carts_path
   end
 
   private
 
-  def resource
-    if user_signed_in?
-      Product.user_cart_products(current_user.cart.product_ids)
-    elsif session[:product_id]
-      Product.where(id: session[:product_id])
+    def adress_params
+      params.require(:adress).permit(:country, :city, :street)
     end
-  end
+
+    def order_detail_params
+      params.require(:order_detail).permit(:first_name, :last_name, :email)
+    end
+
+    def resource
+      current_user.orders.find(params[:id])
+    end
+
+    def clear_cart
+      if user_signed_in?
+        Cart.clear(current_user.cart.id)
+      elsif session[:product_id].present?
+        session[:product_id].clear
+      end
+    end
+
+    def total_sum
+      @ordered_products.pluck(:price).inject(&:+)
+    end
 end
