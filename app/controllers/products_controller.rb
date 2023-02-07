@@ -10,7 +10,6 @@ class ProductsController < ApplicationController
 
   def show
     @product = resource
-
   end
 
   private

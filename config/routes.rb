@@ -13,5 +13,14 @@ Rails.application.routes.draw do
   resources :categories, only: [:index, :show]
   resources :products, only: [:index, :show]
   resources :orders
-  resources :carts
+
+  resources :carts do
+    member do
+      post :add_product
+    end
+
+    collection do
+      get :show
+    end
+  end
 end

@@ -11,7 +11,7 @@
         <%= link_to "CATEGORIES", categories_path, class: "nav-link" %>
       </li>
       <% if user_signed_in? %>
-        <%= link_to (image_tag 'cart.png'), cart_path(id: current_user.id), method: :get, class: "cart-logo" %>
+        <%= link_to (image_tag 'cart.png'), carts_path, method: :get, class: "cart-logo" %>
         <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn-blue bg-cyan-500" %>
         <div class = "text-white text-based font-medium">
             <%= current_user.first_name %>
@@ -19,7 +19,7 @@
       <% else %>
         <%= link_to 'Log in', new_user_session_path, class:"btn-blue bg-cyan-500"%>
         <%= link_to 'Sign up', new_user_registration_path, class:"btn-blue bg-cyan-500"%>
-        <%= link_to (image_tag 'cart.png'), cart_path(:id), class: "cart-logo" %>
+        <%= link_to (image_tag 'cart.png'), carts_path, class: "cart-logo" %>
       <% end %>
     </ul>
   </nav>

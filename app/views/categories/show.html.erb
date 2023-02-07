@@ -2,10 +2,9 @@
   <% @category.products.each do |product| %>
     <div class="product-card">
       <p class="card-text"><%= product.name %> </p>
-      <p class="card-text"><% link_to product.name, class: "link-item nav-link roll" %></p>
       <p class="card-text"><%= product.description %></p>
       <p class="card-text"><%= product.price %><p>
-      <%= button_to "Buy", carts_path(id: @product.id), method: :get, class: "w-28 btn-pink bg-pink-500" %>
+      <%= link_to "Buy", carts_path(product), method: :post, class: "w-28 btn-pink bg-pink-500" %>
     </div>
   <% end %>
 </div>
