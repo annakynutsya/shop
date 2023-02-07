@@ -12,6 +12,6 @@
     <%= button_to 'Delete', cart_path(product), method: :delete, class:'w-20 btn-pink bg-pink-500' %>
   </td>
   <td class="px-6 py-4 text-right">
-    <%= button_to 'Show', product_path(product), method: :get, class:'w-20 btn-pink bg-pink-500' %>
+    <%= link_to 'Show', product_path(product), class:'w-20 btn-pink bg-pink-500' %>
   </td>
 </tr>
