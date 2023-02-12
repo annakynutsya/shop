@@ -1,16 +1,18 @@
-
-<%= simple_form_for(@order, url: orders_path(@order), method: :post) do |f| %>
-  <%= f.simple_fields_for :order_detail do |detail_f| %>
-    <% if !user_signed_in? %>
-      <%= detail_f.input :first_name %>
-      <%= detail_f.input :last_name %>
-      <%= detail_f.input :email %>
+<div class="reg-form-container">
+  <%= simple_form_for @order do |form| %>
+    <%= form.simple_fields_for :order_detail do |f| %>
+      <% if !user_signed_in? %>
+        <%= f.input :first_name, input_html: { class:"reg-form-field w-64" } %>
+        <%= f.input :last_name, input_html: { class:"reg-form-field w-64" }%>
+        <%= f.input :email, input_html: { class:"reg-form-field w-64" } %>
+      <% end %>
+      <%= f.simple_fields_for :adress do |ff| %>
+        <%= ff.input :country, priority: ["UA"], input_html: { class:"reg-form-field h-10 w-64" } %>
+        <%= ff.input :city, input_html: { class:"reg-form-field w-64" } %>
+        <%= ff.input :street, input_html: { class:"reg-form-field w-64" } %>
+        <%= ff.input :comment, as: :text, input_html: { class:"reg-form-field h-16 w-64" } %>
+      <% end %>
     <% end %>
-  <%= f.simple_fields_for :adress do |adress_f| %>
-    <%= adress_f.input :country %>
-    <%= adress_f.input :city %>
-    <%= adress_f.input :street %>
+    <%= form.button :submit, 'Submit Order', class:"btn-blue bg-cyan-500 my-4" %>
   <% end %>
-  <% end %>
-  <%= f.button :submit %>
-<% end %>
+</div>

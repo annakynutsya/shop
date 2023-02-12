@@ -2,7 +2,7 @@
   <% @categories.each do |category| %>
     <div class="product-card">
       <p class="py-2.5 text-xl font-bold w-4/5 m-auto"><%= category.name %></p>
-      <%= link_to "SHOW PRODUCTS", category, class: "w-28 btn-pink mx-auto" %>
+      <%= link_to "SHOW PRODUCTS", category_path(category), class: "w-28 btn-pink mx-auto" %>
     </div>
   <% end %>
 </div>

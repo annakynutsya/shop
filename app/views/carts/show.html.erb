@@ -1,4 +1,4 @@
-<% if @cart_products.present? %>
+<% if @cart.present? %>
   <div class="table-container">
     <table class="table">
       <thead class="thead">
@@ -9,19 +9,24 @@
         </tr>
       </thead>
       <tbody>
-        <% @cart_products.each do |product| %>
-        <%= render 'shared_links/cart_product', product: product %>
+        <% if user_signed_in? %>
+          <% @cart.products.each do |product| %>
+            <%= render 'shared_links/cart_product', product: product %>
+          <% end %>
+        <% else %>
+          <% @cart.each do |product| %>
+            <%= render 'shared_links/cart_product', product: product %>
+          <% end %>
         <% end %>
       </tbody>
     </table>
     <%= link_to 'Make order', new_order_path, class: "btn-blue bg-cyan-500 mx-96 my-6" %>
   </div>
-  <% else %>
-  <%= @cart_products.inspect%>
-    <div class="empty-cart-container w-2/4">
-      <p class="text-2xl mb-8">
-        <%= "Your cart is empty. Let`s discover our assortiment!" %>
-      </p>
-      <%= link_to 'Show products', root_path, class: "h-12 btn-blue bg-cyan-500" %>
-    </div>
+<% else %>
+  <div class="empty-cart-container w-2/4">
+    <p class="text-2xl mb-8">
+      <%= "Your cart is empty. Let`s discover our assortiment!" %>
+    </p>
+    <%= link_to 'Show products', root_path, class: "h-12 btn-blue bg-cyan-500" %>
+  </div>
 <% end %>

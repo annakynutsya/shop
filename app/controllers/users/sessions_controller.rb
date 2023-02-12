@@ -17,10 +17,10 @@ class Users::SessionsController < Devise::SessionsController
   # def destroy
   #   super
   # end
+
    def destroy
-    cart_products = Product.where(id: current_user.cart.cart_products.pluck(:product_id))
-    super
-    session[:product_id] = cart_products
+      super
+      session[:cart] = Product.where(id: params[:id])
    end
 
 

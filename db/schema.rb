@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_02_181011) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_12_140212) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "adresses", force: :cascade do |t|
-    t.string "country"
-    t.string "city"
-    t.string "street"
+    t.string "country", null: false
+    t.string "city", null: false
+    t.string "street", null: false
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -49,8 +49,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_181011) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.integer "position"
+    t.string "name", null: false
+    t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -69,8 +69,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_181011) do
 
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "status"
-    t.datetime "ordered_at"
+    t.string "status", default: "In progress"
+    t.datetime "ordered_at", default: "2023-02-12 14:05:50"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -95,10 +95,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_181011) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.decimal "price"
-    t.string "name"
-    t.text "description"
-    t.integer "position"
+    t.decimal "price", null: false
+    t.string "name", null: false
+    t.text "description", null: false
+    t.integer "position", null: false
     t.bigint "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

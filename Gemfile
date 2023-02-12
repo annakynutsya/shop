@@ -80,3 +80,4 @@ gem 'simplecov'
 gem 'faker'
 gem "devise"
 gem 'simple_form'
+gem "country_select", "~> 8.0"

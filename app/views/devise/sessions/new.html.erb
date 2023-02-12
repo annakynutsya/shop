@@ -1,7 +1,7 @@
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "reg-form-container"}) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
     <%= f.input :email, placeholder: 'user@domain.com', input_html: { class: "reg-form-field"} %>
-    <%= f.input :password, input_html: { class: "reg-form-field"} %>
+    <%= f.input :password, input_html: { class: "reg-form-field" } %>
     <%= f.button :submit, 'Log in', class: "btn-blue bg-cyan-500 my-6 w-20 m-auto" %>
     <%= render "devise/shared/links" %>
 <% end %>

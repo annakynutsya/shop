@@ -1,33 +1,40 @@
 class CartsController < ApplicationController
   def show
-    @cart_products = resource
+    @cart = resource
   end
 
-  def add_product
+  def add_product_to
     if user_signed_in?
-      CartProduct.create(product_id: params[:id], cart_id: current_user.cart.id)
-    elsif session[:product_id]
-      session[:product_id] << params[:id]
+      current_user.cart.products << Product.find(params[:id])
+    elsif session[:cart].present?
+      session[:cart] << params[:id]
+    else
+      initialize_session_cart
     end
-    redirect_to carts_path
+     redirect_to cart_path
   end
 
-  def destroy
-    if current_user
-      CartProduct.find_by(product_id: params[:id], cart_id: current_user.cart.id).destroy
+  def remove_product_from
+    if user_signed_in?
+      current_user.cart.products.destroy(params[:id])
     else
-      session[:product_id].delete(params[:id])
+      session[:cart].delete(params[:id])
     end
-    redirect_to carts_path
+     redirect_to cart_path
   end
 
   private
 
   def resource
     if user_signed_in?
-      Product.user_cart_products(current_user.cart.product_ids)
-    elsif session[:product_id]
-      Product.where(id: session[:product_id])
+      current_user.cart
+    else
+      Product.where(id: session[:cart])
     end
+  end
+
+  def initialize_session_cart
+    session[:cart] = []
+    session[:cart] << params[:id]
   end
 end

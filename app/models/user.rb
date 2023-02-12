@@ -6,12 +6,5 @@ class User < ApplicationRecord
 
   has_one :cart, dependent: :destroy
   has_many :orders, dependent: :destroy
-  has_many :addresses, dependent: :destroy
-
-  # def current_cart
-  #   if self.cart.empty?
-  #     self.cart.create!
-  #   end
-  #   self.cart
-  # end
+  has_many :adresses, dependent: :destroy
 end
