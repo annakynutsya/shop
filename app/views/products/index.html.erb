@@ -1,8 +1,8 @@
 <div class="max-w-7xl mx-auto">
-  <%= image_tag 'banner.jpg', class: "w-full cursor-pointer" %>
+  <%= image_tag 'banner.jpg', class: "w-full" %>
   <% @products.each do |product| %>
     <div class="product-card">
-      <%= render 'shared_links/product',  product: product  %>
+      <%= render 'products/product',  product: product  %>
     </div>
   <% end %>
 </div>

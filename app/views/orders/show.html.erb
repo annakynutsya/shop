@@ -1,24 +1,11 @@
 <h2 class="text-center mt-24 text-2xl">Your order has been successfully placed and will be delivered within 5 days!</h2>
 <h2 class="text-center mt-4 text-2xl">Your order number: <%= @order.id %></h2>
-<div class="table-container min-h-max">
-  <table class="table">
-    <thead class="thead">
-      <tr>
-        <th scope="col" class="px-6 py-6">Product</th>
-        <th scope="col" class="px-6 py-6">Price</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @order.products.each do |product| %>
-        <tr class="tr">
-          <th scope="row" class="th">
-            <%= product.name %>
-          </th>
-          <td class="px-6 py-4">
-            <%= product.price %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+  <div class="cart-container">
+    <% @order.products.each do |product| %>
+      <div class="flex flex-row justify-around">
+        <p class = "cart-item"><%= product.name %></p>
+        <p class = "cart-item"><%= product.category.name %></p>
+        <p class = "cart-item"><%= product.price %></p>
+      </div>
+    <% end %>
+  </div>

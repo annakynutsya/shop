@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :carts do
     member do
       post :add_product_to
-      delete :remove_product_from
+      patch :remove_product_from
     end
   end
 end

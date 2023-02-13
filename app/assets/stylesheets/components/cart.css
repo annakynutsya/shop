@@ -11,11 +11,11 @@
     @apply px-6 py-6 font-medium text-gray-900 whitespace-nowrap dark:text-white;
   }
 
-  .table-container {
-    @apply shadow-md sm:rounded-lg w-2/4 mx-auto mt-32;
+  .cart-container {
+    @apply sm:rounded-lg w-2/4 mx-auto mt-32 bg-cyan-400 shadow-md w-2/4 flex flex-col;
   }
 
-  .tr {
-    @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600;
+  .cart-item {
+    @apply text-lg text-white my-8 font-bold;
   }
 }
