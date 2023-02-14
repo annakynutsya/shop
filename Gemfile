@@ -78,5 +78,5 @@ gem "factory_bot", "~> 6.2"
 gem 'simplecov'
 gem 'faker'
 gem "devise"
-gem 'simple_form'
+gem 'simple_form', git: 'https://github.com/loqimean/simple_form.git'
 gem "country_select", "~> 8.0"
