@@ -1,0 +1,7 @@
+<div class="flex flex-row justify-around">
+<p class = "cart-item"><%= product.name %></p>
+<p class = "cart-item"><%= product.category.name %></p>
+<p class = "cart-item"><%= product.price %></p>
+<%= button_to 'Delete', remove_product_from_cart_path(product), method: :patch, class:'w-20 btn-pink my-8' %>
+<%= link_to 'Show', product_path(product), class:'w-20 btn-pink my-8' %>
+</div>

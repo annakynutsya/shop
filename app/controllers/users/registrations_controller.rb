@@ -12,10 +12,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
-    current_cart = Cart.create(user_id: current_user.id)
-    session[:product_id].each do |product_id|
-      CartProduct.create(cart_id: current_cart.id, product_id: product_id)
-    end
+    current_user.create_cart
+    current_user.cart.products << Product.where(id: session[:product_ids])
   end
 
   # GET /resource/edit
