@@ -1,7 +1,7 @@
 <div class="bg-pink-500">
   <nav class="navbar">
     <div class="logo">
-      <%= link_to image_tag ('logo.png'), root_path, class: "w-32 cursor-pointer" %>
+      <%= link_to (image_tag 'logo.png'), root_path, class: "w-32 cursor-pointer" %>
     </div>
     <ul class="list">
       <li class="list-element">
@@ -19,7 +19,7 @@
       <% else %>
         <%= link_to 'Log in', new_user_session_path, class:"btn-blue"%>
         <%= link_to 'Sign up', new_user_registration_path, class:"btn-blue"%>
-        <%= link_to image_tag ('cart.png'), cart_path, class: "cart-logo" %>
+        <%= link_to (image_tag 'cart.png'), cart_path, class: "cart-logo" %>
       <% end %>
     </ul>
   </nav>
