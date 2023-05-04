@@ -41,12 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_02_181011) do
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
-  create_table "carts_products", id: false, force: :cascade do |t|
-    t.bigint "cart_id", null: false
-    t.bigint "product_id", null: false
-    t.index ["cart_id", "product_id"], name: "index_carts_products_on_cart_id_and_product_id"
-    t.index ["product_id", "cart_id"], name: "index_carts_products_on_product_id_and_cart_id"
-  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
