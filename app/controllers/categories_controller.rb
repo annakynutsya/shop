@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   def show
     @category = resource
   end
-  
+
   private
 
   def collection
