@@ -9,19 +9,19 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #    super
-  # end
+   def create
+      super
+      current_user.cart.products << Product.where(id: session[:product_ids])
+   end
 
   # DELETE /resource/sign_out
   # def destroy
   #   super
   # end
-   def destroy
-    cart_products = Product.where(id: current_user.cart.cart_products.pluck(:product_id))
-    super
-    session[:product_id] = cart_products
-   end
+
+  #  def destroy
+  #     super
+  #  end
 
 
   # protected

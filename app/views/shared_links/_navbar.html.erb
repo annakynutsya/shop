@@ -4,22 +4,22 @@
       <%= link_to (image_tag 'logo.png'), root_path, class: "w-32 cursor-pointer" %>
     </div>
     <ul class="list">
-      <li class="list-el">
+      <li class="list-element">
         <%= link_to "ALL PRODUCTS", root_path, class: "nav-link" %>
       </li>
-      <li class="list-el">
+      <li class="list-element">
         <%= link_to "CATEGORIES", categories_path, class: "nav-link" %>
       </li>
       <% if user_signed_in? %>
-        <%= link_to (image_tag 'cart.png'), carts_path, method: :get, class: "cart-logo" %>
-        <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn-blue bg-cyan-500" %>
+        <%= link_to (image_tag 'cart.png'), cart_path, method: :get, class: "cart-logo" %>
+        <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn-blue" %>
         <div class = "text-white text-based font-medium">
             <%= current_user.first_name %>
         </div>
       <% else %>
-        <%= link_to 'Log in', new_user_session_path, class:"btn-blue bg-cyan-500"%>
-        <%= link_to 'Sign up', new_user_registration_path, class:"btn-blue bg-cyan-500"%>
-        <%= link_to (image_tag 'cart.png'), carts_path, class: "cart-logo" %>
+        <%= link_to 'Log in', new_user_session_path, class:"btn-blue"%>
+        <%= link_to 'Sign up', new_user_registration_path, class:"btn-blue"%>
+        <%= link_to (image_tag 'cart.png'), cart_path, class: "cart-logo" %>
       <% end %>
     </ul>
   </nav>

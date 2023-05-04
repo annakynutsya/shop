@@ -28,7 +28,6 @@ gem "stimulus-rails"
 gem "tailwindcss-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
-gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -79,4 +78,5 @@ gem "factory_bot", "~> 6.2"
 gem 'simplecov'
 gem 'faker'
 gem "devise"
-gem 'simple_form'
+gem 'simple_form', git: 'https://github.com/loqimean/simple_form.git'
+gem "country_select", "~> 8.0"

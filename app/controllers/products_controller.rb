@@ -1,11 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    if params[:id]
-      @products = collection.where(category_id: params[:id])
-    else
-      @products = collection
-    end
-
+    @products = collection
   end
 
   def show

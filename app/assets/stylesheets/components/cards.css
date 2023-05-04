@@ -8,7 +8,7 @@
   }
 
   .empty-cart-container {
-    @apply text-center mx-auto mt-64 text-white bg-pink-500 rounded-lg shadow h-56 py-16;
+    @apply text-center mx-auto mt-64 text-white text-2xl bg-pink-500 rounded-lg shadow h-56 py-16 flex flex-col;
   }
 
   .card-text {

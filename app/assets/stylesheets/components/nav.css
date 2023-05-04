@@ -8,10 +8,10 @@
   }
 
   .list {
-    @apply md:flex md:items-center md:z-auto md:static absolute bg-pink-500 w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500;
+    @apply md:flex md:items-center md:z-auto md:static absolute bg-pink-500 w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 transition-all ease-in duration-500;
   }
 
-  .list-el {
+  .list-element {
     @apply mx-4 mr-20 md:my-0;
   }
 
