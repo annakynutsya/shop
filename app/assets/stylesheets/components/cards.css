@@ -1,0 +1,18 @@
+@layer base {
+  .product-card {
+    @apply my-7 text-center mx-5 bg-cyan-200 py-3.5 inline-flex flex-col rounded-lg shadow flex-wrap w-52 h-60;
+  }
+
+  .big-center-card {
+    @apply mx-auto w-96 h-96 text-center pt-20 rounded-lg shadow mt-16 bg-cyan-200;
+  }
+
+  .empty-cart-container {
+    @apply text-center mx-auto mt-64 text-white bg-pink-500 rounded-lg shadow h-56 py-16;
+  }
+
+  .card-text {
+    @apply py-2 text-xl font-bold w-4/5 mx-auto
+  }
+
+}

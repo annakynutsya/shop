@@ -5,6 +5,7 @@ class ProductsController < ApplicationController
     else
       @products = collection
     end
+
   end
 
   def show
