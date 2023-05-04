@@ -16,7 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     session[:product_id].each do |product_id|
       CartProduct.create(cart_id: current_cart.id, product_id: product_id)
     end
-   end
+  end
 
   # GET /resource/edit
   # def edit

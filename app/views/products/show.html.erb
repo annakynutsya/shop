@@ -1,0 +1,6 @@
+<div class="mx-auto bg-cyan-200 w-96 h-96 text-center pt-20 rounded-lg shadow mt-16">
+	<div class="text-5xl pb-5"><%= @product.name %></div>
+	<div class="text-2xl pb-5">Category: <%= @product.category.name %></div>
+	<div class="text-xl pb-12">Description: <%= @product.description %></div>
+	<%= button_to 'Buy', carts_path, class: "btn-pink bg-pink-500" %>
+</div>

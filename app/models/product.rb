@@ -1,4 +1,8 @@
 class Product < ApplicationRecord
   belongs_to :category
-  has_and_belongs_to_many :orders
+  has_many :orders, through: :product_orders, dependent: :destroy
+  has_many :product_orders, dependent: :destroy
+
+  scope :ordered, -> { order(position: :desc) }
+  scope :user_cart_products, ->(id) { find(id) }
 end

@@ -3,15 +3,15 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
-  has_one :cart
-  has_many :orders     
-  has_many :addresses
 
-  def current_cart
-    if self.cart.empty?
-      self.cart.create!
-    end
-    self.cart
-  end
+  has_one :cart, dependent: :destroy
+  has_many :orders, dependent: :destroy
+  has_many :addresses, dependent: :destroy
+
+  # def current_cart
+  #   if self.cart.empty?
+  #     self.cart.create!
+  #   end
+  #   self.cart
+  # end
 end
